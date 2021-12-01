@@ -167,8 +167,7 @@ color_setup_matrix = {'NAVY': {'NAVY': 0,
                                'GREEN': 7,
                                'LIME': 0}}
 
-strategies = {'Random', 'Local Search', 'Complete Search'}
-strategy = 'Random'
+strategies = ['Random', 'Local', 'Complete']
 st.sidebar.header("Scheduling problem definition")
 
 form = st.sidebar.form(key="input-form")
@@ -184,7 +183,7 @@ colors = form.multiselect(
 
 n_resources = form.slider("Number of resources", 1, 20, 3, 1)
 
-strategy = form.selectbox("Choos a solver", strategies, index=0)
+strategy = form.selectbox("Choose a solver", strategies, index=0)
 n_repeats = form.slider("Iterations", 1, 10000, 1, 100)
 showTables = form.checkbox("Show Data Tables", value=False)
 showColorMatrix = form.checkbox("Show Color Matrix", value=False)
@@ -206,7 +205,7 @@ def generateProblem():
     st.title("Schedule length: " + str(hours(makespan)) +
              " hours (" + str(makespan) + ")")
     # resource timeline chart
-    #st.header("Resource Schedule:")
+    # st.header("Resource Schedule:")
     df = pd.DataFrame(tasks)
     fig = px.timeline(df,  x_start="Start", x_end="Finish",
                       y="Resource", color="Color",  color_discrete_map=color_map, title="Best Solution")  # text="Task",
@@ -243,7 +242,7 @@ def generateProblem():
     histFig = px.histogram(
         pf, x='makespan', nbins=n_repeats, title="Solution analysis")
     allocation.plotly_chart(histFig)
-    #allocation.write(pf.hist('makespan', bins=n_repeats))
+    # allocation.write(pf.hist('makespan', bins=n_repeats))
 
     # Data tables
     if(showTables or showColorMatrix):
@@ -268,3 +267,22 @@ submit = form.form_submit_button(label="Solve")
 
 if(submit):
     generateProblem()
+else:
+    st.title("Task assignment problem play ground")
+    st.header("Purpose")
+    st.text("""We want to play with different algorithms to solve simple task assignment problems with the goal **minimize** length of a schedule.""")
+    st.text("""User can create a task assignment problem by selecting few parameters (defined below), and then choose a type of solver to create a solution.""")
+    st.text("""The task assignment problem generated here is a simple problem. For each task we need to assign a resource to it. 
+    Each task has a color.
+    For a given resource, offset between two consecutive tasks is determined by looking up the color offset matrix. 
+    Goal is to assign all tasks to available resources, while minimizing the toal length of the schedule.
+    Length of a schedule is defined as the time difference between earliest start time and latest end time among the tasks.
+    """)
+    st.markdown('1. Select number of tasks')
+    st.markdown('---')
+    st.markdown('**Hello**')
+    st.markdown('### **Metrics**')
+    st.markdown("""|First|Second|\n|---|----|\n """)
+    st.text("Select duration range of tasks. Duration to tasks are assinged within this range. Durations are in hours.")
+    st.text("Select set of colors for tasks. When tasks are executed on same resource, colors defines the offset between ")
+    st.text("concequtive execution of tasks. Color offset matrix is predefined for the list of colors")

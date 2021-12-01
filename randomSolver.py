@@ -23,14 +23,7 @@ class RandomSolver:
                 self.plan(task, res_position)
                 task = self.selectTask()
 
-            def getEnd(res):
-                if(len(res.tasks) == 0):
-                    return self.scheduler.start
-                else:
-                    return res.tasks[len(res.tasks)-1].end
-
-            self.scheduler.makespan = max(
-                [getEnd(res) for res in self.scheduler.resources.values()]) - self.scheduler.start
+            self.scheduler.updateKPIs()
 
             if(self.best > self.scheduler.makespan):
                 self.bestSch = {
@@ -38,11 +31,23 @@ class RandomSolver:
                     'Tasks': [task.serialize() for task in self.scheduler.tasks.values()],
                     'Resources': [res.serialize() for res in self.scheduler.resources.values()]}
                 self.best = self.scheduler.makespan
+                # self.result.append({'id': i, 'makespan': hours(
+                #     self.scheduler.makespan)})
 
             self.result.append({'id': i, 'makespan': hours(
                 self.scheduler.makespan)})
 
         return self.bestSch, self.result
+
+    def createRandomSolution(self):
+        self.scheduler = self.original
+        task = self.selectTask()
+        while(task):
+            res_position = self.selectResource(task)
+            self.plan(task, res_position)
+            task = self.selectTask()
+
+        self.scheduler.updateKPIs()
 
     def selectTask(self):
         taskList = [t for t in self.scheduler.tasks.values()
