@@ -269,20 +269,20 @@ if(submit):
     generateProblem()
 else:
     st.title("Task assignment problem play ground")
-    st.header("Purpose")
-    st.text("""We want to play with different algorithms to solve simple task assignment problems with the goal **minimize** length of a schedule.""")
-    st.text("""User can create a task assignment problem by selecting few parameters (defined below), and then choose a type of solver to create a solution.""")
-    st.text("""The task assignment problem generated here is a simple problem. For each task we need to assign a resource to it. 
-    Each task has a color.
-    For a given resource, offset between two consecutive tasks is determined by looking up the color offset matrix. 
-    Goal is to assign all tasks to available resources, while minimizing the toal length of the schedule.
-    Length of a schedule is defined as the time difference between earliest start time and latest end time among the tasks.
-    """)
-    st.markdown('1. Select number of tasks')
-    st.markdown('---')
-    st.markdown('**Hello**')
-    st.markdown('### **Metrics**')
-    st.markdown("""|First|Second|\n|---|----|\n """)
-    st.text("Select duration range of tasks. Duration to tasks are assinged within this range. Durations are in hours.")
-    st.text("Select set of colors for tasks. When tasks are executed on same resource, colors defines the offset between ")
-    st.text("concequtive execution of tasks. Color offset matrix is predefined for the list of colors")
+    # st.header("Purpose")
+    # st.text("""We want to play with different algorithms to solve simple task assignment problems with the goal **minimize** length of a schedule.""")
+    # st.text("""User can create a task assignment problem by selecting few parameters (defined below), and then choose a type of solver to create a solution.""")
+    # st.text("""The task assignment problem generated here is a simple problem. For each task we need to assign a resource to it.
+    # Each task has a color.
+    # For a given resource, offset between two consecutive tasks is determined by looking up the color offset matrix.
+    # Goal is to assign all tasks to available resources, while minimizing the toal length of the schedule.
+    # Length of a schedule is defined as the time difference between earliest start time and latest end time among the tasks.
+    # """)
+    # st.markdown('1. Select number of tasks')
+    # st.markdown('---')
+    # st.markdown('**Hello**')
+    # st.markdown('### **Metrics**')
+    # st.markdown("""|First|Second|\n|---|----|\n """)
+    # st.text("Select duration range of tasks. Duration to tasks are assinged within this range. Durations are in hours.")
+    # st.text("Select set of colors for tasks. When tasks are executed on same resource, colors defines the offset between ")
+    # st.text("concequtive execution of tasks. Color offset matrix is predefined for the list of colors")
